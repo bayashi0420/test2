@@ -3,14 +3,37 @@
 namespace App\Http\Controllers;
 
 //use宣言で外部にあるクラスをPostController内にインポート
+
+use App\Http\Requests\PostRequest;
 use App\Models\Post; //App\Models内のPostクラスをインポート
-use Illuminate\Http\Request;
+
 
 class PostController extends Controller
 {
     public function index(Post $post) //インポートしたPostをインスタンス化して$postとして使用
     {
-        return $post->get(); //$postの中身を戻り値にする
+        return view('posts.index')->with(['posts' => $post->getpaginatebylimit(3)]);
+        //blade内で使う変数'posts'と設定。'posts'の中身にgetを使いインスタンス化した$postを代入
     }
     //
+    /** 
+     * 特定のIDのPOSTを表示する
+     * 
+     * ＠params object post //引数の＄postはid=1のPostインスタンス
+     * ＠return Pesponse post view
+     */
+    public function show(Post $post)
+    {
+        return view("posts.show")->with(["post" => $post]);
+    }
+    public function create()
+    {
+        return view("posts.create");
+    }
+    public function store(Post $post, PostRequest $request)
+    {
+        $input = $request["post"];
+        $post->fill($input)->save();
+        return redirect("/posts/" . $post->id);
+    }
 }
