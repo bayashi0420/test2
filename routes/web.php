@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 
-Route::get('/posts', [PostController::class, 'index']);
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +15,8 @@ Route::get('/posts', [PostController::class, 'index']);
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PostController::class, 'index']);
+route::get("/posts/create", [PostController::class, "create"]);
+route::get('/posts/{post}', [PostController::class, 'show']);
+route::post("/posts", [PostController::class, "store"]);
+//"/posts/{対象のデータID}"にgetリクエストが来たらpostcontrollerのshowメソッドを実行する
