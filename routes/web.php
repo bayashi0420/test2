@@ -19,4 +19,6 @@ Route::get('/', [PostController::class, 'index']);
 route::get("/posts/create", [PostController::class, "create"]);
 route::get('/posts/{post}', [PostController::class, 'show']);
 route::post("/posts", [PostController::class, "store"]);
+route::get('/posts/{post}/edit', [PostController::class, 'edit']);
+route::put('/posts/{post}', [PostController::class, 'update']);
 //"/posts/{対象のデータID}"にgetリクエストが来たらpostcontrollerのshowメソッドを実行する
