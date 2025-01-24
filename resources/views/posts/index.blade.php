@@ -21,7 +21,7 @@
                 <form action="/posts/{{$post->id}}" id="from_{{$post->id}}" method="post">
                     @csrf
                     @method('delete')
-                    <button type="button" onclick="deletepost({{$post->id}})">delete</button>
+                    <button type="button" onclick="deletepost({{ $post->id }})">delete</button>
                 </form>
         </div>
         @endforeach
