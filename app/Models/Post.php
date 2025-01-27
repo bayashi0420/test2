@@ -10,6 +10,7 @@ class Post extends Model
     protected $fillable = [
         "title",
         "body",
+        "category_id"
     ];
     use HasFactory;
 
@@ -22,5 +23,9 @@ class Post extends Model
     public function getpaginatebylimit(int $limit_count = 10)
     {
         return $this->orderby('updated_at', 'desc')->paginate($limit_count);
+    }
+    public function category()
+    {
+        return $this->belongsTo(category::class);
     }
 }
