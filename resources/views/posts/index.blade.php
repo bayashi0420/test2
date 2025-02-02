@@ -18,6 +18,11 @@
 
                 </a>
                 <p class='body'>{{$post->body}}</p>
+                <form action="/posts/{{$post->id}}" id="from_{{$post->id}}" method="post">
+                    @csrf
+                    @method('delete')
+                    <button type="button" onclick="deletepost({{ $post->id }})">delete</button>
+                </form>
         </div>
         @endforeach
     </div>
@@ -28,6 +33,16 @@
         <a href="/posts/{{$post->id}}">{{ $post->title}}</a>
     </h2>
     <a href="/posts/create">create</a>
+    `from_${id}`
+    <script>
+        function deletepost(id) {
+            'use strict'
+            if (confirm('削除すると復元できません。\n本当に削除しますか')) {
+                document.getElementById(`from_${id}`).submit();
+            }
+        }
+    </script>
+    <a href="">{{ $post->category->name }}</a>
 </body>
 
 </html>

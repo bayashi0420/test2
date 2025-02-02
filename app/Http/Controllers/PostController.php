@@ -41,6 +41,11 @@ class PostController extends Controller
     {
         return view('posts.edit')->with(["post" => $post]);
     }
+    public function delete(post $post)
+    {
+        $post->delete();
+        return redirect('/');
+    }
     public function update(PostRequest $request, post $post)
     {
         $input_post = $request['post'];
